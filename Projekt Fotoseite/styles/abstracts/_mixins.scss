@@ -1,0 +1,62 @@
+@use "./variables" as *;
+@use "sass:color";
+
+@mixin clearfix() {
+    &::after {
+      display: block;
+      clear: both;
+      content: "";
+    }
+  }
+
+  @mixin make-container() {  /*hier habe ich ein mixin für meinen wiederverwendbaren Container erstellt, um gleiche Standards für alle Container zu haben, dadurch habe ich die Freiheit meine individuellen Container, individuell zu verändern, ohne, dass dadurch der Standardcontainter verändert wird*/
+        max-width: 155rem; 
+        margin-left: auto; 
+        margin-right: auto;
+        padding-left: 7.5rem;
+        padding-right: 7.5rem;
+
+        @include clearfix;
+
+        @media(max-width: $breakpoint-w){
+            
+                padding-left: 4.5rem;
+                padding-right: 4.5rem;
+            
+        }
+
+        @media(max-width: $breakpoint-xlg){
+            
+            padding-left: 3.5rem;
+            padding-right: 3.5rem;
+        
+    }
+
+    @media(max-width: $breakpoint-lg){
+            
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    
+}
+
+        @media(max-width: $breakpoint-md){
+            
+                padding-left: 1rem;
+                padding-right: 1rem;
+            
+        }
+        
+        @media(max-width: $breakpoint-sm){
+            
+                padding-left: 0.25rem;
+                padding-right: 0.25rem;
+            
+        }
+
+   
+  }
+
+  @mixin generate-selection() {
+        color: white;
+        background-color: color.scale($color-secondary, $alpha: -20%); /*hier habe ich ein mixin für ::selection erstellt. Selection regelt das Verhalten von markiertem Text, wie Farbe, Hintergrundfarbe und Textshadow*/
+    }

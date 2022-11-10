@@ -1,0 +1,358 @@
+@use "../abstracts" as *;
+
+
+
+
+
+.header {
+    height: 40rem;
+    min-height: calc(27.5rem + 32vw);
+    position: relative;
+    overflow: hidden;
+}
+/* @media (max-width: 2010px){
+    .header{
+        min-height: 53vw;
+    }
+}
+!!!Durch den clac()-Befehel hinfällig geworden
+@media (max-width: 1750px) {
+    .header{
+        min-height: 58vw;
+    }
+}
+
+
+@media (max-width: 1500px) {
+    .header{
+        min-height: 62vw;
+    }
+}
+
+@media (max-width: 1300px) {
+    .header{
+        min-height: 66vw;
+    }
+} */
+
+.header__linear-gradient{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 10vw;
+    z-index: 1;
+    background-image: linear-gradient(-$slope-incline, white 49.5%, transparent 50.5%);
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    background-size: 100vw 10vw;
+}
+
+.header::before{
+    content: "";
+    background-image: url("../images/pexels-benjamin-suter-3617500.jpg") ;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 100% auto;
+    top: 0;
+    position: absolute;
+    bottom: -8rem;
+    width: 100vw;
+ 
+    
+}/* hier habe ich zwei bilder über before und after eingebunden, um meine Schrift in den Hintergrund zu bekommen*/
+
+
+
+.header::after{
+    content: "";
+    background-image: url('../images/pexels-benjamin-suter-3617500-mountains.webp');
+    height: 33vw;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center bottom;
+    position: absolute;
+    width: 100vw;
+    bottom: -8rem;
+    
+}
+
+@media (max-width: $breakpoint-sxw){
+    .header::before{
+        bottom: -5rem;
+    }
+
+    .header::after{
+        bottom: -5rem;
+    }
+}
+
+@media (max-width: $breakpoint-w){
+    .header::before{
+        bottom: 1rem;
+    }
+
+    .header::after{
+        bottom: 1rem;
+    }
+
+    .header__linear-gradient{
+     bottom: 1rem;
+       
+    }
+}
+
+@media (max-width: $breakpoint-xlg){
+    .header::before{
+        bottom: 5.5rem;
+    }
+
+    .header::after{
+        bottom: 5.5rem;
+    }
+
+    
+    .header__linear-gradient{
+        bottom: 5.5rem;
+          
+       }
+}
+
+@media (max-width: $breakpoint-lg){
+    .header::before{
+        bottom: 8.5rem;
+    }
+
+    .header::after{
+        bottom: 8.5rem;
+    }
+    .header__linear-gradient{
+        bottom: 8.45rem;
+          
+       }
+}
+
+@media (max-width: 1100px){
+    .header::before{
+        bottom: 11rem;
+    }
+
+    .header::after{
+        bottom: 11rem;
+    }
+
+    .header__linear-gradient{
+        bottom: 10.95rem;
+          
+       }
+}
+
+@media (max-width: 850px){
+    .header::before{
+        bottom: 13.5rem;
+    }
+
+    .header::after{
+        bottom: 13.5rem;
+    }
+
+    .header__linear-gradient{
+        bottom: 13.4rem;
+          
+       }
+}
+
+@media (max-width:650px){
+    .header::before{
+        bottom: 15rem;
+    }
+
+    .header::after{
+        bottom: 15rem;
+    }
+
+    .header__linear-gradient{
+        bottom: 15rem;
+          
+       }
+}
+
+@media (max-width:480px){
+    .header::before{
+        background-size: cover;
+    }
+
+.header::after{ 
+    display: none;
+}
+.header__linear-gradient{
+    background-image: linear-gradient(-5.71deg, white 49%, transparent 50.5%);
+      
+   }
+
+}
+
+
+.header__heading-div{
+    clear: both; /*hier sorge ich mit dem clear-Befehl dafür, dass die nachfolgenden elemente nicht mehr floaten*/
+}
+
+.header__heading-main{
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    padding-top: 7rem;
+    font-size: 13rem;
+    text-transform: uppercase;
+    line-height: 85%;
+    text-shadow: 0 0 2rem black;
+
+    animation-name: header__heading-main-font-weight;
+    animation-delay: 0.75s;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+}
+
+@keyframes header__heading-main-font-weight{  /*hier animiere ich mein Schrift mit dem keyframes-befehl. Keyframes sind besonders, dann sehr gut, wenn ich effekte für elemente brauche, die gerade noch nicht angezeigt werden, weil der effekt immer erst abgespielt wird, wenn das element eingeblendet wird*/
+    0%{
+        opacity: 0;
+        font-weight: 100;
+    }
+
+    100%{
+        opacity: 1;
+        font-weight: 700;
+    }
+}
+
+@media (max-width: 2050px){
+    .header__heading-main{
+        font-size: 11rem;
+    }
+}
+
+@media (max-width: 1680px){
+    .header__heading-main{
+        font-size: 9rem;
+        padding-top: 5rem;
+    }
+}
+
+@media (max-width: 1450px){
+    .header__heading-main{
+        font-size: 8rem;
+        padding-top: 3rem;
+    }
+}
+
+@media (max-width: 1270px){
+    .header__heading-main{
+        font-size: 7rem;
+        padding-top: 2.5rem;
+    }
+}
+
+@media (max-width: 1100px){
+    .header__heading-main{
+        font-size: 5.5rem;
+        padding-top: 2.5rem;
+    }
+}
+
+@media (max-width: 850px){
+    .header__heading-main{
+        font-size: 4rem;
+    }
+}
+
+@media (max-width: 640px){
+    .header__heading-main{
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 503px){
+    .header__heading-main{
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 333px){
+    .header__heading-main{
+        font-size: 1.8rem;
+    }
+}
+
+
+
+
+.header__heading-sub{
+    color: white;
+    text-align: center;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.75rem;
+    margin-top: 3rem;
+    text-shadow: 0 0 1rem black;
+    z-index: 1;
+    position: relative;
+}
+
+@media (max-width: 1750px){
+    .header__heading-sub{
+        font-size: 2rem;
+        letter-spacing: 0.5rem;
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 1450px){
+    .header__heading-sub{
+        font-size: 1.6rem;
+        letter-spacing: 0.4rem;
+        margin-top: 1.8rem;
+    }
+}
+
+@media (max-width: 1270px){
+    .header__heading-sub{
+        font-size: 1.3rem;
+        letter-spacing: 0.25rem;
+        margin-top: 1.65rem;
+    }
+}
+
+
+@media (max-width: 850px){
+    .header__heading-sub{
+        font-size: 0.8rem;
+        letter-spacing: 0.2rem;
+        margin-top: 1.5rem;
+    }
+}
+
+
+@media (max-width: 640px){
+    .header__heading-sub{
+        font-size: 0.6rem;
+        letter-spacing: 0.15rem;
+    }
+}
+
+@media (max-width: 503px){
+    .header__heading-sub{
+        font-size: 0.5rem;
+        letter-spacing: 0.12rem;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 333px){
+    .header__heading-sub{
+        font-size: 0.35rem;
+        letter-spacing: 0.12rem;
+        margin-top: 1rem;
+    }
+}
+

@@ -1,0 +1,60 @@
+@use '../abstracts' as *;
+@use 'sass:color';
+/*hier habe ich die Styles für unterschiedliche Buttons erstellt, die dann über den jeweiligen Klassennamen in unsere Seite eingebunden werden können*/
+.button{
+    border: currentColor solid 0.125rem;
+    color: $color-primary;
+    border-radius: 999rem;
+    padding: 1rem 6rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1.25rem;
+    display: inline-block;
+    text-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.25);
+    text-align: center;
+
+    &--secondary{
+        font-size: 1.75rem;
+        background-color: $color-secondary;
+        color: white;
+        border: 0.125rem solid $color-secondary;
+        padding: 1rem 7rem;
+
+        @media (max-width: $breakpoint-xxs){
+            font-size: 1rem;
+            padding: 0 3rem;
+        }
+    }
+
+    @media (max-width: $breakpoint-s){
+        padding: 1rem 4rem;
+        font-size: 0.75rem;
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        padding: 0.25rem 3rem;
+    }
+
+    &:hover{
+        color: color.scale($color-primary, $lightness: -20%);
+    }
+
+    &--white{
+        color: white;
+
+        &:hover{
+            color: color.scale(white, $lightness: -30%);
+        }
+    }
+
+    &--background-blur{
+        backdrop-filter: blur(0.275rem);
+
+        &:hover{
+            backdrop-filter: blur(0);
+        }
+    }
+}
+
+

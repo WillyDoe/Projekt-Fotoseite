@@ -1,0 +1,61 @@
+@use "sass:color";
+@use "sass:math";
+$breakpoint-xxxs: 18em!default;
+$breakpoint-xxs: 24em!default;
+$breakpoint-xms: 28em!default;
+$breakpoint-xs: 32em!default;
+$breakpoint-s: 36em!default;
+$breakpoint-sm: 48em!default;
+$breakpoint-md: 62em!default;
+$breakpoint-lg: 75em!default;
+$breakpoint-xlg: 87.5em!default;
+$breakpoint-w: 100em!default;
+$breakpoint-sw: 112.5em!default;
+$breakpoint-sxw: 125em!default;
+$breakpoint-h: 137.5em!default;
+$breakpoint-sh: 150em!default;
+$breakpoint-sxh: 162.5em!default;
+
+$color-primary: rgb(0, 226, 156) !default;
+$color-secondary: #26464d!default;
+
+$color-secondary-dark: #011820!default;
+$color-secondary-light: #11707d!default;
+
+$slope-incline: math.asin(0.1);
+
+@media (min-width: 36em) {}/* hier habe ich die standard-breakpoints eingebunden, damit diese jederzeit für mich ohne suchmaschineneingabe aufzufinden sind und ich diese immer wieder kopieren kann*/
+
+/** Breakpoint: 768px+ */
+@media (min-width: 48em) {}
+
+/** Breakpoint: 992px+ */
+@media (min-width: 62em) {}
+
+/** Breakpoint: 1200px+ */
+@media (min-width: 75em) {}
+
+/** Breakpoint: 1400px+ */
+@media (min-width: 87.5em) {}
+
+/** Breakpoint: 1600px+ */
+@media (min-width: 100em) {}
+
+/** Breakpoint: 1800px+ */
+@media (min-width: 112.5em) {}
+
+/** Breakpoint: 2000px+ */
+@media (min-width: 125em) {}
+
+/** Breakpoint: 2200px+ */
+@media (min-width: 137.5em) {}
+
+/** Breakpoint: 2400px+ */
+@media (min-width: 150em) {}
+
+
+/** Breakpoint: 2600px+ */
+@media (min-width: 162.5em) {}
+
+
+/*hier in Variables habe ich meine Breakpoints und meine Farben festgehalten festgehalten*/

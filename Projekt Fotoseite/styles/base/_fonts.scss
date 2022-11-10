@@ -1,0 +1,18 @@
+@font-face {
+    font-family: "Jost";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("../fonts/jost/Jost-VariableFont_wght.woff2") format("truetype");
+}
+
+@font-face {
+    font-family: "Jost";
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("../fonts/jost/Jost-Italic-VariableFont_wght.woff2 ") format("truetype");
+}
+
+/*hier habe ich über @font-face die Fonts für meine Seite eingebunden*/
+/*über font-display: swap, ermögliche wir dem Browser, falls eine Font noch nicht geladen wurde, dass der Text in der Standardschriftart angezeigt werden kann*/

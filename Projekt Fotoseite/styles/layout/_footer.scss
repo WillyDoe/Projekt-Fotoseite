@@ -1,0 +1,311 @@
+@use '../abstracts/' as *;
+@use 'sass:math';
+@use 'sass:color';
+
+
+.footer{
+    background-color: $color-secondary-light;
+    padding-top: 4rem;
+}
+
+.footer__flex{
+    display: flex;
+    justify-content: space-between; /*hier verwende ich eine Flexbox, um mein Layout zu erstellen. Die wichtigsten Eigenschaften sind: justify-content, mit dem ich die Ausrichtung auf der main-axis bestimme. align- items mit dem ich die anordnung auf der cross-axis beeinflusse
+    . Der Flex-Befehl, der das Verhalten einzelner Items bestimmt, ob sie wachsen, schrumpfen und wie ihre standardgröße ist. Flex-direktion beeinflusst richtung von main und cross axis. Align-self beeinflusst die Position einzelner Flex-item*/
+
+    @media(max-width: $breakpoint-sm){
+
+        flex-direction: column;
+    }
+    
+}
+
+.footer__flex-left{
+    flex: 0 0 50%;
+
+    @media(max-width: $breakpoint-sm){
+        order: 2;
+        margin-top: 2rem;
+    }
+    
+}
+
+
+
+
+.footer__flex-right{
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    @media(max-width: $breakpoint-sm){
+        justify-content: flex-start;
+    }
+
+    @media(max-width: $breakpoint-xms){
+        justify-content: space-around;
+    }
+}
+
+.footer__heading{
+    color: white;
+    font-weight: 550;
+    font-size: 7.5rem;
+    text-transform: uppercase;
+    line-height: 1em;
+
+    @media(max-width: $breakpoint-xlg){
+
+        font-size: 4.5rem;
+    }
+
+    @media(max-width: $breakpoint-lg){
+
+        font-size: 3.5rem;
+    }
+
+    @media(max-width: $breakpoint-md){
+
+        font-size: 2.5rem;
+    }
+
+    @media(max-width: $breakpoint-xms){
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    @media(max-width: $breakpoint-xxs){
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+   
+}
+
+.br{
+    @media(max-width: $breakpoint-sm){
+
+       display: none;
+    }
+}
+
+
+.footer__paragraph{
+    color: $color-primary;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+
+    @media(max-width: $breakpoint-xms){
+        font-size: 0.8rem;
+        text-align: center;
+    }
+
+    @media(max-width: $breakpoint-xxs){
+        font-size: 0.75rem;
+        text-align: center;
+    }
+}
+
+.footer__logo-container{
+    background: linear-gradient(120deg, $color-primary 0%, $color-secondary 100%);
+    display: block;
+     align-self: center;
+    padding: 3rem;
+    clip-path: circle();
+
+    @media(max-width: $breakpoint-sxw){
+
+        padding: 1.5rem;
+    }
+
+    @media(max-width: $breakpoint-lg){
+
+        padding: .5rem;
+    }
+
+    @media(max-width: $breakpoint-sm){
+
+       
+    }
+ 
+}
+
+
+.footer__logo{
+    width: 35rem;
+    padding: 1.5rem;
+    border: 1px solid white;
+    border-radius: 999px;
+    background: linear-gradient(120deg, $color-primary 0%, $color-secondary 100%);
+    background-repeat: no-repeat;
+    fill: white;
+    box-sizing: content-box;
+
+    @media(max-width: $breakpoint-sxw){
+        width: 27.5rem;
+        padding: 0.5rem;
+    }
+
+    @media(max-width: $breakpoint-lg){
+
+        width: 20.5rem;
+    }
+
+    @media(max-width: $breakpoint-md){
+
+        width: 16.5rem;
+    }
+
+    @media(max-width: $breakpoint-xxs){
+       width: 10rem;
+    }
+    
+}
+
+.footer__contact-item{
+    display: flex;
+    margin-bottom: 4rem;
+    position: relative;
+    
+
+}
+
+
+.footer__contact-item-icon{
+    background-color: $color-primary;
+    width: 7.5rem;
+    height: 7.5rem;
+    text-align: center;
+    border-radius: 99999px;
+    font-size: 4.5rem;
+    color: $color-secondary-light;
+    z-index: 2;
+    position: relative;
+
+    @media(max-width: $breakpoint-md){
+
+        width: 4.5rem;
+        height: 4.5rem;
+        font-size: 2.5rem;
+        line-height: 4rem;
+    }
+
+    &--phone{
+        line-height: 7rem;
+
+        @media(max-width: $breakpoint-md){
+
+           
+            line-height: 4.5rem;
+        }
+    }
+
+    
+
+    
+}
+  
+
+
+
+
+.footer__contact-link{
+    text-decoration: none;
+    color: white;
+    background-color: color.scale($color-secondary-light, $lightness: -15%);
+    align-self: center;
+    padding: 2rem 4rem;
+    width: 20rem;
+    border-radius: 0 25px 25px 0;
+    position: absolute;
+    left: 7.5%;
+    white-space: nowrap;
+    text-align: center;
+    overflow: hidden;
+    z-index: 1;
+
+    @media(max-width: $breakpoint-xlg){
+
+        left: 9.5%;
+    }
+
+    @media(max-width: $breakpoint-lg){
+
+        left: 11.5%;
+    }
+
+    @media(max-width: $breakpoint-md){
+
+        left: 5.5%;
+        padding: 1rem 2rem;
+    }
+
+    @media(max-width: $breakpoint-xxs){
+        font-size: 0.8rem;
+        width: 12rem;
+        left: 20.5%;
+     }
+
+    &:hover &::after{
+        transform: translateX(100%);
+    }
+    
+
+    &::after{
+        content: '';
+        position: absolute; /* das after element wird über meinem Link platziert und über z-index wird dafür gesorgt, dass mein link-text-über dem after-element angezeigt wird*/
+        top:0;
+        bottom: 0;
+        right: 0;
+        left: -100%;
+        width: 100%;
+        background-color: color.scale($color-secondary, $lightness: -25%);
+        z-index: -1;  
+        transition: transform 0.25s linear;      
+    }
+
+    &:hover{
+        &::after{
+        transform: translate(100%, 0px); /*hier erstelle ich eine hover für mei ::after element, um es nach rechts zu schieben*/
+    }
+}  
+    
+}
+
+
+
+.rights{
+    padding-bottom: 2rem;
+    &::before{
+        content: '';
+        display: inline-block;
+        width: 100%;
+        height: 0.025rem;
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    @media(max-width: $breakpoint-xms){
+        padding-bottom: 1rem;
+    }
+}
+
+.rights__container{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 0.5rem;
+}
+
+.rights__link{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5);
+
+    &:hover{
+        color: $color-primary;
+        border-bottom: 0.15rem solid $color-primary;
+    }
+
+    @media(max-width: $breakpoint-xms){
+        font-size: 0.5rem;
+    }
+}

@@ -1,0 +1,442 @@
+@use '../../abstracts/' as *;
+@use 'sass:color';
+@use 'sass:math';
+
+$-offers-card-border-width: calc(1rem / 16);
+$-offers-card-margin: 1rem;
+$-offers-card-border-color: rgba(0, 0, 0, 0.15);
+
+$-half-pixel-width: math.div(1rem, 32);
+
+@mixin offers__card-hover-bg($alpha-dt: 0%){
+    background-image: linear-gradient(90deg,
+    transparent calc(50% - #{$-half-pixel-width}),
+    white calc(50% - #{$-half-pixel-width}),
+    white calc(50% + #{$-half-pixel-width}),
+    transparent calc(50% + #{$-half-pixel-width})),
+    linear-gradient(135deg,
+    color.scale($color-primary, $alpha: $alpha-dt) 0%,
+    color.scale($color-primary, $lightness: -20%, $alpha: $alpha-dt)80%);
+}
+
+.offers{
+    background-color: rgb(240, 240, 240);
+    min-height: 10rem;
+}    
+
+.offers__container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    margin-left: -$-offers-card-margin;
+    margin-right: -$-offers-card-margin;
+
+    @media (max-width: $breakpoint-s){
+        margin-left: $-offers-card-margin;
+        margin-right: $-offers-card-margin;
+    }
+
+    @media (max-width: $breakpoint-s){
+        padding-top: 3rem;
+    }
+
+    @media (max-width: $breakpoint-xs){
+        padding-top: 2rem;
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        padding-top: 1rem;
+    }
+}
+
+
+.offers__card-container{
+    flex: 0 1 42.5rem;
+    margin: 0 $-offers-card-margin;   
+    margin-top: 4rem;
+    background-color: transparent;
+    @media (max-width: $breakpoint-xms){
+        padding: 0 0 1rem 0;
+    }
+
+    @media (max-width: $breakpoint-xs){
+        margin-top: 2rem;
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        margin-top: 1rem;
+    }
+    
+}
+
+
+
+
+.offers__card-container--flip{
+    perspective: 800px;
+    /*hier wird die perspektive gesetz, damit meine Animation auch funktioniert*/
+    
+    &:hover .offers__card{
+        transform: rotateY(180deg);
+    }
+
+    .offers__card-hover{
+        opacity: 1;
+        transform: rotateY(180deg);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    
+}
+
+
+.offers__card-container-3d{
+    perspective: 800px;
+
+   .offers__card{
+        transform: rotateY(calc(calc(var(--mouse-x, 0.5) - 0.5) * 20deg)) rotateX(calc(calc(var(--mouse-y, 0.5) - 0.5) * -20deg));  /* hier wird ein js eingebunden, um die aktuelle mausposition zu bekommen*/
+        transform-style: preserve-3d;
+        transition: transform 0.5s linear;
+    }
+    &:hover .offers__card{
+        transition: 0s;
+    }
+
+    .offers__card-hover{
+      display: none;
+
+    }
+ }
+
+ .offers__card-container-3d-hover{
+    perspective: 800px;
+    transform-style: preserve-3d; /* transfomr-style:preserve 3d muss gesetz werden, damit 3d Effekte von child elements vom parent erkannt werden*/
+
+    .offers__card{
+        transform: rotateY(calc(calc(var(--mouse-x, 0.5) - 0.5) * 20deg)) rotateX(calc(calc(var(--mouse-y, 0.5) - 0.5) * -20deg));  
+        transform-style: preserve-3d;
+        transition: transform 0.5s linear;
+        transform-style: preserve-3d;
+    }
+
+    &:hover .offers__card{
+        transition: 0s;
+    }
+
+    &:hover .offers__card-hover{
+        opacity: 1;
+        perspective: 200px;
+        transform-style: preserve-3d;
+    }
+
+    &:hover .button{
+        transform: translateZ(20px);
+        transform-style: preserve-3d;
+        box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.5);
+    }
+
+    .offers__card-hover{
+        background-color: transparent;
+        @include offers__card-hover-bg(-30%);
+        transform: translateZ(2rem);
+    }
+
+    .offers__card-fs{
+        transform-style: preserve-3d;
+        filter: blur();
+        transition: filter 0.5s linear;
+    }
+
+    &:hover .offers__card-fs{
+        filter: blur(2rem);
+        
+    }
+    
+ }
+
+
+.offers__card{
+    position: relative;
+    transition: all 1s ease-in-out;
+    box-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.5);
+    transform-style: preserve-3d;
+ 
+
+}
+
+.offers__card-fs{
+    padding: 0 0 2rem 0;
+    background-color: white;
+    border-left: $-offers-card-border-width solid $-offers-card-border-color ;
+    border-right: $-offers-card-border-width solid $-offers-card-border-color ;
+    border-top: $-offers-card-border-width solid $-offers-card-border-color ;   
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;  /*über backface-visibility:hidden; sorge ich daür, dass man die rückseite eines elements nicht sieht, wenn dieses gedreht wirds. Besonders wichtig ist das ganze, wenn ich in einem containaer zwei elemente habe, die jeweil eine
+    seite repräsentieren und ich sicherstellen möchte, dass das jeweilige element nur angezeigt wird, wenn man seine vorderseite sieht*/
+    transform: rotateY(0deg);
+    transform-style: preserve-3d;
+     
+    &::after{
+        content: '';
+        position: absolute;
+        display: block;
+        bottom: 0;
+        left: $-half-pixel-width;
+        right: -$-half-pixel-width;
+        height: 0.5rem;
+        background-color: $color-primary;
+        border-left: $-offers-card-border-width solid  color.scale($color-primary, $saturation: 50%) ;
+        border-right: $-offers-card-border-width solid color.scale($color-primary, $saturation: 50%);
+    }
+
+    @media (max-width: $breakpoint-xs){
+        
+        padding: 0 0 0.75rem 0;
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        
+        padding: 0 0 0.5rem 0;
+    }
+}
+
+
+
+.offers__card-hover{
+    @include offers__card-hover-bg();
+    position: absolute;
+    display: flex;
+    opacity: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: -$-offers-card-border-width;
+    bottom: -$-offers-card-border-width;
+    left: -$-offers-card-border-width;
+    right: -$-offers-card-border-width;
+    background-color: $color-primary;
+    background-repeat: no-repeat, no-repeat;
+    background-position: center top, center center;
+    background-size: 100% 30%, 100% 100%;
+    z-index: 2;
+    transition: opacity 0.25s linear;
+    opacity: 0;
+
+    &:hover{
+        opacity: 1;
+    }
+
+}
+
+
+
+
+
+.offers__image-container{
+    position: relative;
+    margin-top: -$-offers-card-border-width;
+    margin-right: -$-offers-card-border-width;
+    margin-bottom: 0;
+    margin-left: -$-offers-card-border-width;
+    background-color: $color-primary;
+
+   
+
+
+    &::before{
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        z-index: 1;
+        border-top: $-offers-card-border-width solid $-offers-card-border-color;
+        border-right: $-offers-card-border-width solid $-offers-card-border-color;
+        border-left: $-offers-card-border-width solid $-offers-card-border-color;
+    }
+
+    &::after{
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 5.5rem;
+        background-image: linear-gradient(-$slope-incline, white 49.5% ,  transparent 50.2%);
+        background-position: 50% 100%;
+        background-repeat: no-repeat;
+
+        @media(max-width: $breakpoint-xxs){
+            height: 3.5rem;
+        }
+    }
+}
+
+.offers__image{
+    width: 100%;
+    filter: grayscale(100%);
+    mix-blend-mode: multiply;
+}
+
+.offers__content{
+    padding: 0 4rem;
+
+    @media (max-width: $breakpoint-s){
+        padding: 0 2rem ;
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        padding: 0 1rem ;
+    }
+
+    
+}
+
+.offers__content-heading{
+    color: $color-secondary;
+    font-weight: 500;
+    font-size: 3rem;
+
+    @media (max-width: $breakpoint-s){
+        font-size: 2rem;
+    }
+
+    @media (max-width: $breakpoint-xms){
+        font-size: 1.5rem;
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        font-size: 1.25rem;
+    }
+
+}
+
+.offers__content-subheading{
+    color: $color-primary;
+    font-size: 1.75rem;
+
+    @media (max-width: $breakpoint-s){
+        font-size: 1rem;
+    }
+
+    @media (max-width: $breakpoint-xms){
+        font-size: 0.75rem;
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        font-size: 0.5rem;
+    }
+}
+
+
+.offers__content-info{
+    
+
+    display: flex;
+    margin-top: 2rem;
+    border-top: $-offers-card-border-width solid $-offers-card-border-color;
+    border-bottom: $-offers-card-border-width solid $-offers-card-border-color;
+
+    background-image: linear-gradient(90deg,
+    transparent calc(50% - #{$-half-pixel-width}),
+    $-offers-card-border-color calc(50% - #{$-half-pixel-width}),
+    $-offers-card-border-color calc(50% + #{$-half-pixel-width}),
+    transparent calc(50% + #{$-half-pixel-width})
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 75%;
+    background-position: 50% 50%;
+}/*hier habe ich den linear-gradient gesetz, der sich um den Trennstrich zwischen duration und level kümmert*/
+
+%offers__content-info-column{
+    flex: 1 1 50%;
+    color: $color-secondary;
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 2rem;
+
+
+
+    @media (max-width: $breakpoint-s){
+        font-size: 0.75rem;
+        padding: 1rem 0;
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        font-size: 0.5rem;
+        padding: 0.5rem 0;
+    }
+}
+
+.offers__content-duration{
+    @extend %offers__content-info-column;
+}
+
+.offers__content-level{
+    @extend %offers__content-info-column;
+}
+
+.offers__content-duration-text,
+.offers__content-level-text{
+    padding-left: 0.5rem;
+
+    @media (max-width: $breakpoint-s){
+        padding-left: 0.25rem ;
+    }
+}
+
+.offers__content-price-container{
+    padding-top: 2rem ;
+    
+    @media (max-width: $breakpoint-s){
+       padding-top: 1rem;
+    }
+
+    @media (max-width: $breakpoint-xms){
+        padding-top: 0.5rem;
+     }
+
+     @media (max-width: $breakpoint-xxs){
+        font-size: 0.35rem;
+    }
+}
+
+.offers__content-price-text{
+    font-size: 1.5rem;
+
+    @media (max-width: $breakpoint-s){
+        font-size: 1rem;
+    }
+
+    @media (max-width: $breakpoint-xs){
+        font-size: 0.75rem;
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        font-size: 0.5rem;
+    }
+}
+
+.offers__content-price{
+    color: $color-primary;
+    display: block;
+    font-weight: 700;
+    font-size: 3.75rem;
+
+    @media (max-width: $breakpoint-s){
+        font-size: 2.275rem;
+    }
+
+    @media (max-width: $breakpoint-xs){
+        font-size: 1.5rem;
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        font-size: 1rem;
+    }
+}
+
+

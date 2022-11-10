@@ -1,0 +1,305 @@
+@use '../../abstracts/' as *;
+
+$-tours-background: $color-secondary-dark;
+$-tours-icon-size: 5.5rem;
+$-tours-icon-size-medium: 4.5rem;
+$-tours-icon-size-small: 3.5rem;
+$-tours-animation-duration: 0.5s;
+
+.tours{
+    background-color: $-tours-background;
+    position: relative;
+    padding-bottom: 14.5rem;
+
+    @media (max-width: $breakpoint-xms){
+            padding-bottom: 5.5rem
+    }
+
+    &::before,
+    &::after{
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;   
+        content: 'Tame the Wild';
+        position: absolute;
+        text-transform: uppercase;
+        color: $-tours-background;
+        font-size: calc(100vw / 8);
+        text-shadow: 0 0 1.5px white;
+        z-index: 0;
+        font-weight: bold;
+        overflow: hidden;
+        white-space: nowrap;
+
+       
+        
+    }
+
+    @supports (-webkit-text-stroke: 1px white) or (text-stroke: 1px white){
+    &::before{
+        -webkit-text-stroke: 2px rgba(255,255, 255, 0.5);
+        text-shadow: none;
+    }
+
+    &::after{
+        -webkit-text-stroke: 2px transparent;       
+        text-shadow: none;
+    }
+    }
+  
+
+}
+
+.tours__container{
+    position: relative;
+    z-index: 1;
+
+    @include make-container
+}
+
+.tours__heading{
+    color: white;
+    text-align: center;
+    padding-top: 7rem;
+    padding-bottom: 3rem;
+    font-size:  5rem;
+    letter-spacing: 0.15em;
+    font-weight: 550;
+    text-transform: uppercase;
+
+    @media (max-width: $breakpoint-sxw){
+        font-size: 4.25rem;
+    }
+
+    @media (max-width: $breakpoint-sw){
+        font-size: 3.5rem;
+    }
+
+    @media (max-width: $breakpoint-w){
+        font-size: 2.75rem;
+    }
+
+    @media (max-width: $breakpoint-xlg){
+        font-size: 2.25rem;
+    }
+
+    @media (max-width: $breakpoint-lg){
+        font-size: 1.75rem;
+    }
+
+    @media (max-width: $breakpoint-xs){
+        font-size: 1.25rem;
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        font-size: 1rem;
+    }
+}
+
+.tours__cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+
+.tours__card{
+    flex: 0 0 calc(140rem / 5);
+    position: relative;
+    height: 42rem;
+    margin-top: 4rem;
+    overflow: hidden;
+    box-shadow: 0 0 0.5rem transparent;
+    transform: scale(1);
+    transition: transform $-tours-animation-duration ease-in-out, box-shadow $-tours-animation-duration ease-in-out, z-index $-tours-animation-duration linear;
+    z-index: 0;
+    /*hier wird alles zurück animiert. Diesmal der z-index auch nach und nach*/
+    &:hover{
+        transform: scale(1.125);
+        box-shadow: 0 0 0.5rem white;
+        z-index: 100;
+        transition: z-index 0s linear, transform $-tours-animation-duration ease-in-out, box-shadow $-tours-animation-duration ease-in-out;
+}   /*hier wird der z-index, der transform und der box-shadow hin animiert. Z-index greift sofort*/
+
+    @media (max-width: $breakpoint-xs){
+        flex: 0 0 calc(140rem / 7.5);
+        height: 28rem;
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        flex: 0 0 calc(140rem / 9);
+        height: 23.25rem;
+    }
+}
+
+.tours__card-icon-background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+    background-color: $color-primary;
+    height: $-tours-icon-size;
+    transform: translate(calc(-100% + #{$-tours-icon-size}), 0);
+
+    transition:  transform $-tours-animation-duration ease-in;
+
+    @media (max-width: $breakpoint-xs){
+        height: $-tours-icon-size-medium;
+        transform: translate(calc(-100% + #{$-tours-icon-size-medium}), 0);
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        height: $-tours-icon-size-small;
+        transform: translate(calc(-100% + #{$-tours-icon-size-small}), 0);
+    }
+
+    .tours__card:hover & {
+        transform: translate(0, 0);
+       
+    }
+}
+
+
+.tours__card-img{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.tours__card-icon-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: translate(0, 0);
+    z-index: 1;
+
+    transition: transform $-tours-animation-duration ease-in;
+
+    .tours__card:hover &{
+        transform: translate(calc(50% - calc(#{$-tours-icon-size} / 2)), 0);
+
+        @media (max-width: $breakpoint-xs){
+            transform: translate(calc(50% - calc(#{$-tours-icon-size-medium} / 2)), 0);
+        }
+
+        @media (max-width: $breakpoint-xxs){
+            transform: translate(calc(50% - calc(#{$-tours-icon-size-small} / 2)), 0);
+        }
+    }/**/
+}
+
+.tours__card-icon{
+    width: $-tours-icon-size;
+    height: $-tours-icon-size;
+    color: white;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    filter: drop-shadow(0 0 0.5rem black);
+
+    @media (max-width: $breakpoint-xs){
+        height: $-tours-icon-size-medium;
+        width: $-tours-icon-size-medium;
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        height: $-tours-icon-size-small;
+        width: $-tours-icon-size-small;
+    }
+}
+
+.tours__card-content{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    color: white;
+    padding: 0 1rem;
+    text-shadow: 0 0 0.25rem black;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.25)5%);
+
+    transform: translate(0, calc(100% - 7rem));
+
+    transition: transform $-tours-animation-duration ease-in;
+    /*hier wird der content animiert*/
+    .tours__card:hover &{
+        transform: translate(0, 0);
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        transform: translate(0, calc(100% - 6rem));
+    }
+}
+
+.tours__card-heading{
+    font-size: 2rem;
+    padding-bottom: 0.5rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    @media (max-width: $breakpoint-xs){
+        font-size: 1.5rem;
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        font-size: 1.25rem;
+
+    }
+}
+
+.tours__card-location{
+    font-size: 1.75rem;
+    padding-bottom: 1rem;
+    display: flex;
+
+    @media (max-width: $breakpoint-xs){
+        font-size: 1.25rem;
+        padding-bottom: 1.75rem;
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        font-size: 1rem;
+        padding-bottom: 1rem;
+    }
+
+}
+
+.tours__card-describtion{
+    font-size: 1.5rem;
+
+    background: linear-gradient(90deg, $color-primary 60%, transparent 60%);
+    background-position-y: top;
+    background-size: 100% 2%;
+    background-repeat: no-repeat;
+    padding: 2rem 0;
+
+    @media (max-width: $breakpoint-xs){
+        font-size: 1rem;
+ 
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        font-size: 0.75rem;
+    }
+}
+
+.tours__card-location-icon{
+    font-size: 2rem;
+}
+
+.tours__location-span{
+    line-height: 2;
+    padding-left: 0.25rem;
+    white-space: nowrap;
+    text-overflow: ellipsis; /*text-overflow: ellipsis; sorgt dafür, dass der wenn der text den container sprengt, automatisch drei punkte gesetz werden und der text nicht mehr angezeigt wird*/
+    overflow: hidden;
+}

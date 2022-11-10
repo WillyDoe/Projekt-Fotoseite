@@ -1,0 +1,306 @@
+@use '../../abstracts/' as *;
+@use 'sass:color';
+@use 'sass:math';
+
+.booking-modal{
+    display: none;
+    
+    &:target{
+        display: flex;  /* wenn das element z.B über einen Button/Link angesteuert wird erscheint das Booking-Modal*/
+    }
+
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    z-index: 99;
+    overflow: scroll;
+
+    &::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: color.scale(black, $alpha: -70%);
+        backdrop-filter: blur(25px);
+        animation: booking-modal-fade 0.5s linear 1;
+        animation-fill-mode: both;
+    }/* hier verwende ich ein before element, um den hintergrund gesondert animieren zu können*/
+
+}
+
+@keyframes booking-modal-fade{
+    0%{
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes booking-modal-slide{
+    0%{
+        transform: translateY(-200%);
+    }
+
+    100%{
+        transform: translateY(0%);
+    }
+}
+
+/* hier animiere ich den slide in des seitenmenüs*/
+
+.booking-modal__formular{
+    width: 70rem;
+    height: 35rem;
+    position: relative;
+    box-shadow: 0 0 2rem black;
+    background-color: rgb(127, 127, 127);
+    $modal-conten-bg: color.scale($color-secondary-light, $alpha: -15%);
+    animation: booking-modal-slide 0.75s linear 1;
+    animation-delay: 0.5s;
+    animation-fill-mode: both;
+    background-image: linear-gradient(95deg, transparent 34.5%,$modal-conten-bg 34.75%),
+    linear-gradient(90deg, transparent 35%, color.scale(white, $alpha: -70%) 100%),
+    url('../images/modal/pexels-david-bartus-610293.jpg');
+    background-position: 50% 50%,50% 50%, 0% 50%;
+    background-repeat: no-repeat,no-repeat, no-repeat;
+    background-size:  auto,auto, cover;
+    border-radius: 5px;
+    overflow: hidden;
+
+    @media (max-width:$breakpoint-md){
+        height: 40rem;
+        width: 25rem;
+    }
+
+  
+}
+
+.booking-modal__back-button{
+    position: absolute;
+    display: block;
+    top: 1rem;
+    right: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    text-decoration: none;
+    color: $color-primary;
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 1;
+    
+
+    &:hover{
+        border-bottom: solid $color-primary 1px;
+    }
+}
+
+
+.booking-modal__content{
+    width: 100%;
+    padding-left: 45%;
+    padding-top: 6%;
+
+    @media (max-width:$breakpoint-md){
+        padding-top: 20%;
+    }
+}
+
+.booking-modal__heading{
+
+    font-size: 3.5rem;
+    font-weight: 400;
+
+    @media (max-width:$breakpoint-md){
+        font-size: 1.2rem;
+    }
+}
+
+.bookin-modal__paragraph{
+    font-weight: 350;
+    padding-right: 10rem;
+
+    @media (max-width:$breakpoint-md){
+        font-size: 0.8rem;
+        padding-right: 2rem;
+    }
+}
+
+.booking-modal__form-content-text{
+    position: relative;
+}
+
+.booking-modal__form-text{
+    display: flex;
+    margin: 3rem 0rem;
+ 
+
+    @media (max-width:$breakpoint-md){
+        flex-direction: column;
+        margin: 2rem 0;
+        margin-left: -1rem;
+    }
+}
+
+.input-text{
+    color: $color-primary;
+    background-color: transparent;
+    margin-right: 1rem;
+    font-family: inherit;
+    border-radius: 555px;
+    border: 1px solid $color-primary;
+    padding: 1.25rem 2.5rem;
+    transition: transform 1s linear;
+    box-shadow: 0 0 2rem rgba(0,0,0,0.75);
+    
+    &::placeholder{
+        color: transparent;
+        font-size: 1rem;
+        text-shadow: none;
+        @media(max-width: $breakpoint-xxs){
+            font-size: 0.8rem;
+        }
+    }
+
+    &:focus{
+        outline: none;
+    }
+
+
+    @media (max-width:$breakpoint-md){
+        margin-right: 0;
+        margin-top: 1rem;
+        
+    }
+
+    @media(max-width: $breakpoint-xxs){
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+        padding: 1.25rem 2rem;
+        margin-left: -1rem;
+    }
+
+}
+
+.form-label{
+    font-family: 'Jost';
+    position: absolute;
+    top: 29.5%;
+    left: 18.5%;
+    color: $color-primary;
+    width: 75%;
+    height: 75%;
+    font-size: 1.1rem;
+    transition: transform 0.25s linear;
+    text-shadow: 0 0 0.5rem rgba(0,0,0,0.5);
+
+    .input-text:focus ~ &,
+    .input-text[placeholder]:not(:placeholder-shown) ~ &{
+        transform: scale(0.75) translate(0, 3.5rem);
+        transform-origin: 0% 50%;
+    }
+
+    @media (max-width:$breakpoint-md){
+        top: 42.5%;
+    }
+
+    @media(max-width: $breakpoint-xxs){
+        font-size: 0.8rem;
+        top: 42.5%;
+
+        .input-text:focus ~ &,
+    .input-text[placeholder]:not(:placeholder-shown) ~ &{
+        transform: scale(0.75) translate(0, 2.75rem);
+        transform-origin: 0% 50%;
+    }
+    }
+    
+}
+
+.booking-modal__form-content-radio{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: $color-primary;
+    font-family: inherit;
+    @media(max-width: $breakpoint-xxs){
+        font-size: 0.8rem;
+     }
+}
+
+.booking-modal__form-content-radio--white{
+    .radio-label::before{
+        content: '';
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        border: 1px solid white;
+        border-radius: 9999px;
+        margin-right: 0.5rem;
+        position: relative;
+        top: 1.5px;
+        background: radial-gradient(circle at center center, white 49.5%, transparent 53.5%);
+
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 0 0;
+        transition: background-size linear 0.25s;
+
+       
+    }
+
+    .input-radio:checked ~ .radio-label::before{
+       background-size: 100% 100%;
+       
+    }
+}
+
+.input-radio{
+    color: $color-primary;
+    display: none;
+    
+    &:checked ~ .radio-label{
+        font-weight: bold;
+    }
+}
+
+
+
+.booking-modal__form-content-submit{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.input-submit{
+    display: block;
+    margin-right: 26.75%;
+    margin-top: 1rem;
+    padding: 1rem 10%;
+    border-radius: 25px;
+    background-color: $color-primary;
+    border: transparent;
+    box-shadow: 0 0 1rem rgba(0,0,0,0.5);
+    color: color.scale($color-secondary-dark, $alpha: -10%);
+    font-size: 1rem;
+    font-family: inherit;
+
+    &:hover{
+        box-shadow: none;
+        color: white;
+    }
+
+    @media (max-width:$breakpoint-md){
+        margin-right: 2rem;
+    }
+
+    @media(max-width: $breakpoint-xxs){
+       font-size: 0.8rem;
+    }
+}

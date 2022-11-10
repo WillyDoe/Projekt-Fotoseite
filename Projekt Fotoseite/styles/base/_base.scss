@@ -1,0 +1,39 @@
+@use "../abstracts/" as *; /* über @use binde ich ander SCSS-Dateien ein oder lade SCSS-Module*/
+@use "sass:color";
+
+* {
+    box-sizing: border-box;  /* hier habe ich das box-sizing für alle elemente auf border-box gestellt. Das bedeutet, dass ein element mit einer fest definierten größe
+    durch hinzufügen von padding und borders nicht größer wird sondern der content teil schrumpft*/
+}
+
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+    font-family: 'Jost', sans-serif;
+}
+
+
+input,
+select{
+    font-family: 'Jost';
+}
+
+
+
+::-moz-selection{
+    @include generate-selection();
+}
+
+::selection{
+    @include generate-selection();
+}
+
+/* in meiner base.scss habe ich alle Styles definiert, die für alle meine Elemente eines Typs gelten sollen*/

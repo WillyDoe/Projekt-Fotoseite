@@ -1,0 +1,293 @@
+@use '../../abstracts/' as *;
+@use 'sass:math';
+@use 'sass:color';
+
+.container__gallery{
+    @include make-container;
+    padding-bottom: 6rem;
+}
+
+.gallery__heading{
+    text-align: center;
+    padding-top: 7rem;
+    padding-bottom: 3rem;
+    font-size:  5rem;
+    letter-spacing: 0.15em;
+    font-weight: 550;
+    text-transform: uppercase;
+    color: $color-secondary;
+
+    @media (max-width: $breakpoint-sxw){
+        font-size: 4.25rem;
+    }
+
+    @media (max-width: $breakpoint-sw){
+        font-size: 3.5rem;
+    }
+
+    @media (max-width: $breakpoint-w){
+        font-size: 2.75rem;
+    }
+
+    @media (max-width: $breakpoint-xlg){
+        font-size: 2.25rem;
+    }
+
+    @media (max-width: $breakpoint-lg){
+        font-size: 1.75rem;
+    }
+
+    @media (max-width: $breakpoint-xs){
+        font-size: 1.25rem;
+        padding-top: 3rem;
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        font-size: 1rem;
+        padding-top: 2rem;
+    }
+}
+
+.gallery__grid{
+    $column-width: math.div(140rem, 5);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, $column-width);/*hier verwende ich für die höhe des Grids eine feste Größe, damit die Bilder einheitlich hoch angezeigt werden */
+
+    @media (max-width: $breakpoint-sxw){
+        $column-width: math.div(110rem, 5);   
+        grid-template-rows: repeat(2, $column-width);
+    }
+
+    @media (max-width: $breakpoint-w){
+        $column-width: math.div(91rem, 5);   
+        grid-template-rows: repeat(2, $column-width);
+    }
+
+    @media (max-width: $breakpoint-lg){
+        $column-width: math.div(70rem, 5);   
+        grid-template-rows: repeat(2, $column-width);
+    }
+
+    @media (max-width: $breakpoint-md){
+        $column-width: math.div(60.5rem, 5);   
+        grid-template-rows: repeat(2, $column-width);
+    }
+
+    @media (max-width: $breakpoint-sm){
+        $column-width: math.div(46.5rem, 5);   
+        grid-template-rows: repeat(2, $column-width);
+    }
+
+    @media (max-width: $breakpoint-sm){
+        $column-width: math.div(35.5rem, 5);   
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, $column-width);
+    }
+
+    @media (max-width: $breakpoint-sm){
+        $column-width: math.div(35.5rem, 5);   
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, $column-width);
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        $column-width: math.div(23.5rem, 5);   
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, $column-width);
+    }
+
+    @media (max-width: $breakpoint-xxxs){
+        $column-width: math.div(17.5rem, 5);   
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, $column-width);
+    }
+    
+}
+
+.gallery__grid-item{
+    $animation-duration: 0.5s;
+
+    display: block;
+    position: relative;
+    z-index: 0;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0);
+    transform: scale(1);
+    filter: contrast(1.1) brightness(1.15) saturate(1.1);
+    transition: filter $animation-duration linear, transform $animation-duration linear, z-index $animation-duration linear, box-shadow $animation-duration linear;
+
+    &::before{
+        content: "";
+        display:block;
+        height: 100%;
+        left: 0;
+        top: 0;
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+        background: radial-gradient(circle closest-corner, transparent 0, rgba(175, 105, 24, .4) 100%);
+        mix-blend-mode: multiply;
+        opacity: 1;
+        transition: opacity $animation-duration linear;
+    }   
+
+    &:hover{
+        transform: scale(1.1);
+        z-index: 100;
+        filter: contrast(1) brightness(1) saturate(1);
+        box-shadow: 0 0 1rem rgba(0, 0, 0, 1);
+        transition: filter 0.1s linear, transform 0.1s linear, z-index 0s linear;
+        
+        &::before{
+            opacity: 0;
+            transition: opacity 0.1s linear;
+        }  
+    }
+
+    &--first{
+        grid-column-start: 1;
+        grid-column-end: span 2;
+        grid-row-start: 1;
+        grid-row-end: span 2;
+    }
+
+    &--last{
+        grid-column-start: 4;
+        grid-column-end: span 2;
+        grid-row-start: 1;
+        grid-row-end: span 2;
+
+        @media (max-width: $breakpoint-sm){
+            grid-column-start: 1;
+            grid-column-end: span 2;
+            grid-row-start: 1;
+            grid-row-end: span 2;
+        }
+    }
+}
+
+
+
+.gallery__grid-item-image{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery__grid-item-image-bg{
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.gallery__grid-2{
+    $column-width: math.div(140rem, 5);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, $column-width);
+    animation: gallery__grid-show 1s linear 0s 1;
+
+    @media (max-width: $breakpoint-sxw){
+        $column-width: math.div(110rem, 5);   
+        grid-template-rows: repeat(2, $column-width);
+    }
+
+    @media (max-width: $breakpoint-w){
+        $column-width: math.div(91rem, 5);   
+        grid-template-rows: repeat(2, $column-width);
+    }
+
+    @media (max-width: $breakpoint-lg){
+        $column-width: math.div(70rem, 5);   
+        grid-template-rows: repeat(2, $column-width);
+    }
+
+    @media (max-width: $breakpoint-md){
+        $column-width: math.div(60.5rem, 5);   
+        grid-template-rows: repeat(2, $column-width);
+    }
+
+    @media (max-width: $breakpoint-sm){
+        $column-width: math.div(46.5rem, 5);   
+        grid-template-rows: repeat(2, $column-width);
+    }
+
+    @media (max-width: $breakpoint-sm){
+        $column-width: math.div(35.5rem, 5);   
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, $column-width);
+    }
+
+    @media (max-width: $breakpoint-sm){
+        $column-width: math.div(35.5rem, 5);   
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, $column-width);
+    }
+
+    @media (max-width: $breakpoint-xxs){
+        $column-width: math.div(23.5rem, 5);   
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, $column-width);
+    }
+
+    @media (max-width: $breakpoint-xxxs){
+        $column-width: math.div(17.5rem, 5);   
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, $column-width);
+    }
+    
+}
+
+
+.gallery__grid-button{
+    display: none;
+}
+
+.gallery .gallery__grid-button ~ .gallery__grid-2{
+    display: none;
+}
+
+.gallery .gallery__grid-button:checked ~ .gallery__grid-2{
+    display: grid;
+}
+
+.gallery .gallery__grid-button ~ .gallery__grid-button-label-container-less{
+    display: none;
+}
+
+.gallery .gallery__grid-button:checked ~ .gallery__grid-button-label-container-more{
+    display: none;
+}
+
+.gallery .gallery__grid-button:checked ~ .gallery__grid-button-label-container-less{
+    display: block;
+}
+
+.gallery__grid-button-label-container-more{
+    display: block;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.gallery__grid-button-label-container-less{
+    display: block;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+@keyframes gallery__grid-show{
+    0%{
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 1;
+    }
+}
+
+

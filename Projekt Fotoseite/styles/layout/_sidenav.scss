@@ -1,0 +1,149 @@
+@use '../abstracts/' as *;
+@use 'sass:math';
+@use 'sass:color';
+
+
+.sidenav{
+
+    display: block;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    pointer-events: none;
+
+    .sidenav__opened:checked ~ &{
+        pointer-events: all;
+    }
+}
+
+.sidenav__opened{
+    display: none;
+}
+
+.sidenav__container{
+    position: absolute;
+    z-index: 9999999;
+    width: 20%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgb(240, 240, 240);
+    border-radius: 5px 0 0 5px;
+    box-shadow: 0 0 1rem black ;
+    transform: translate(calc(100% + 1rem), 0%);
+    will-change: transform;
+    transition: transform 1s linear;
+
+    .sidenav__opened:checked ~ .sidenav &{
+        transform: translate(0%, 0%);
+        transition: transform 1s linear;
+    }
+
+    @media(max-width: $breakpoint-sm){
+        width: 40%;
+    }
+
+}
+
+.sidenav-background-close{
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 80%;
+    background-color: rgba(0,0,0,0.85);
+
+    opacity: 0;
+    transition: opacity 1s linear;
+
+    .sidenav__opened:checked ~ .sidenav &{
+        opacity: 1;
+        transition: opacity 1s linear;
+    }
+
+
+
+
+    @media(max-width: $breakpoint-sm){
+        width: 60%;
+    }
+}
+
+.sidenav__close{
+    cursor: pointer;
+    color: $color-secondary;
+    font-size: 1.5rem;
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 0;
+    height: 3rem;
+    width: 3rem;
+    text-align: center;
+    line-height: 2;
+
+    &:hover{
+        border-bottom: 1px solid $color-primary;
+        color: $color-primary;
+    }
+
+    @media (max-width: $breakpoint-lg){
+        margin-left: 1rem;
+     }
+}
+
+.sidenav__navigation-list{
+    list-style: none;
+    margin-top: 7.5rem;
+    margin-left: 2.5rem;
+
+    @media (max-width: $breakpoint-lg){
+       margin-left: 1rem;
+    }
+
+    @media (max-width: $breakpoint-xms){
+        
+        margin-left: 0.5rem;
+     }
+    
+    
+}
+
+.sidenav__navigation-list-item{
+    margin-bottom: 1rem;
+    
+    
+}
+
+.sidenav__navigation-list-link{
+    text-decoration: none;
+    color: $color-secondary;
+    font-size: 2rem;
+    font-weight: 200;
+    text-shadow: 0 0 1rem rgba(0,0,0,0.25);
+
+    transition: font-weight 0.5s linear;
+
+    &:hover{
+        color: $color-primary;
+        border-bottom: 1px solid $color-primary;
+        font-weight: 500;
+
+        transition: font-weight 0.5s linear;
+    }
+
+    @media (max-width: $breakpoint-lg){
+        font-size: 1.5rem;
+    }
+
+    @media (max-width: $breakpoint-xms){
+        
+        font-size: 1rem;
+     }
+    
+}
